@@ -1,7 +1,8 @@
 let container = document.querySelector('.container')
-let redSide = document.querySelectorAll('.redSide')
-let blueSide = document.querySelectorAll('.blueSide')
-let first = document.querySelectorAll('.first')
+let redSide = Array.from(document.querySelectorAll('.redSide'))
+let blueSide = Array.from(document.querySelectorAll('.blueSide'))
+let first = Array.from(document.querySelectorAll('.first'))
+let options = redSide.concat(blueSide, first)
 let boxes = []
 let redBig = true
 let blueBig = true
@@ -17,8 +18,14 @@ for (let i = 0; i < 9; i++) {
 
 boxes.forEach(box => {
     box.addEventListener('click', e => {
+        options.forEach(o => {
+            o.style.pointerEvents = 'none'
+        })
+    
+
         let image = document.createElement('img')
         let c
+
         if (Array.from(e.target.children).length == 0) {
             if (blueTurn && blueBig) {
                 image.src = 'images/bigRing.png'
@@ -27,7 +34,7 @@ boxes.forEach(box => {
             } else if (blueTurn && !blueBig) {
                 image.src = 'images/smallRing.png'
                 image.dataset.colour = 'blue'
-                c ='blue'
+                c = 'blue'
             } else if (!blueTurn && redBig) {
                 image.src = 'images/bigCross.png'
                 image.dataset.colour = 'red'
@@ -38,13 +45,32 @@ boxes.forEach(box => {
                 c = 'red'
             }
             e.target.appendChild(image)
+            changeSize(c)
+            changeTurn()
+        } else {
+            let newSrc = e.target.firstChild.src
+            if (e.target.firstChild.src.indexOf('images/bigRing.png') != -1 && blueTurn && !blueBig) {
+                newSrc = 'images/ringInRing.png'
+                c = 'blue'
+            } else if (e.target.firstChild.src.indexOf('images/bigCross.png') != -1 && blueTurn && !blueBig) {
+                newSrc = 'images/ringInCross.png'
+                c = 'blue'
+            } else if (e.target.firstChild.src.indexOf('images/bigCross.png') != -1 && !blueTurn && !redBig) {
+                newSrc = 'images/crossInCross.png'
+                c = 'red'
+            } else if (e.target.firstChild.src.indexOf("images/bigRing.png") != -1 && !blueTurn && !redBig) {
+                newSrc = 'images/crossInRing.png'
+                c = 'red'
+            }
+
+            if(e.target.firstChild.src !== newSrc) {
+            e.target.firstChild.src = newSrc
+            changeSize(c)
+            changeTurn()
+            }
         }
-
-        changeSize(c)
-        changeTurn()
     })
-});
-
+})
 redSide.forEach(size => {
     size.addEventListener('click', e => changeSize('red'))
 })
@@ -52,10 +78,11 @@ blueSide.forEach(size => {
     size.addEventListener('click', e => changeSize('blue'))
 })
 first.forEach(size => {
-    size.addEventListener('click', e => changeColor())
+    size.addEventListener('click', e => changeTurn())
 })
 
 function changeSize(colour) {
+    
     if (colour == 'blue') {
         blueBig = !blueBig
         blueSide.forEach(size => {
@@ -79,14 +106,14 @@ function changeSize(colour) {
     }
 }
 
-function changeColor() {
-        blueTurn = !blueTurn
-        first.forEach(c => {
-            c.classList.remove('selected')
-            if (blueTurn && c.classList.contains('blueFirst')) {
-                c.classList.add('selected')
-            } else if (!blueTurn && c.classList.contains('redFirst')) {
-                c.classList.add('selected')
-            }
+function changeTurn() {
+    blueTurn = !blueTurn
+    first.forEach(c => {
+        c.classList.remove('selected')
+        if (blueTurn && c.classList.contains('blueFirst')) {
+            c.classList.add('selected')
+        } else if (!blueTurn && c.classList.contains('redFirst')) {
+            c.classList.add('selected')
+        }
     })
 }
