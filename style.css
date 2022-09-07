@@ -11,7 +11,7 @@ img {
 }
 
 span {
-    font-size: 1vw;
+    font-size: 1.5vw;
 }
 
 .container {
@@ -84,3 +84,25 @@ span {
     display: none;
 }
 
+@media only screen and (max-width: 600px) {
+
+    span {
+        font-size: 3vw;
+    }
+
+    .container {
+        width: 70vw;
+    }
+
+    .options {
+        margin: 5vh 0;
+    }
+
+    .choice {
+        width: 20vw;
+    }
+
+    #winner {
+        font-size: 10vw;
+    }
+}
