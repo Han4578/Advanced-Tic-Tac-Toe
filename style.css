@@ -10,12 +10,16 @@ img {
     pointer-events: none;
 }
 
+span {
+    font-size: 1vw;
+}
+
 .container {
     margin: 0 auto;
     display: grid;
     grid-template:  repeat(3, 1fr) / repeat(3,1fr);
     aspect-ratio: 1;
-    width: 300px;
+    width: 25vw;
 }
 
 .boxes {
@@ -23,13 +27,14 @@ img {
     justify-content: center;
     align-items: center;
     border: 1px black solid;
+    background-color: white;
 }
 
 .options {
     display: flex;
     justify-content: space-evenly;
     flex-grow: 0;
-    margin-bottom: 10%;
+    margin: 2vw 0;
 }
 .choice {
     display: flex;
@@ -66,5 +71,16 @@ img {
 
 .blueFirst {
     background-color: rgb(77, 77, 244);
+}
+
+#winner {
+    text-align: center;
+    font-size: 5vw;
+    background-color: white;
+    border: 2px black solid;
+    padding: 5px 20px;
+    width: 50%;
+    margin: 10vh auto;
+    display: none;
 }
 
