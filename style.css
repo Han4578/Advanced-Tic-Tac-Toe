@@ -1,6 +1,8 @@
-* {
-    width: 100%;
+* ::selection {
+    background-color: transparent;
+    color: #000;
 }
+
 
 body {
     background-color: rgb(0, 255, 187);
@@ -8,18 +10,33 @@ body {
 
 img {
     pointer-events: none;
+    width: 100%;
 }
 
 span {
     font-size: 1.5vw;
+    width: 100%;
 }
 
-.container {
+input {
+    height: 70%;
+    aspect-ratio: 1;
+}
+
+.container, .container2 {
     margin: 0 auto;
-    display: grid;
+    display: none;
     grid-template:  repeat(3, 1fr) / repeat(3,1fr);
     aspect-ratio: 1;
     width: 25vw;
+}
+
+.container2 {
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+}
+
+.display {
+    display: grid;
 }
 
 .boxes {
@@ -65,12 +82,27 @@ span {
     background-color: rgb(118, 118, 6);
 }
 
+.selected::selection {
+    color: yellow;
+}
+
 .redFirst {
     background-color: rgb(244, 77, 77);
 }
 
 .blueFirst {
     background-color: rgb(77, 77, 244);
+}
+
+.mode {
+    margin: 0 auto;
+    width: 40%;
+    height: 3vh;
+    background-color: rgb(86, 222, 222);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
 }
 
 #winner {
@@ -82,6 +114,10 @@ span {
     width: 50%;
     margin: 10vh auto;
     display: none;
+}
+
+#mode, label {
+    display: inline;
 }
 
 @media only screen and (max-width: 600px) {
