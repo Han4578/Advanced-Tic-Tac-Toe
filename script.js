@@ -2,7 +2,7 @@ let container = document.querySelector('.container')
 let container2 = document.querySelector('.container2')
 let redSide = Array.from(document.querySelectorAll('.redSide'))
 let mode = document.querySelector('#mode')
-let modebar = document.querySelector('.mode')
+let modeBar = document.querySelector('.mode')
 let blueSide = Array.from(document.querySelectorAll('.blueSide'))
 let first = Array.from(document.querySelectorAll('.first'))
 let options = redSide.concat(blueSide, first)
@@ -41,7 +41,7 @@ for (const b of [boxes, boxes2]) {
             options.forEach(o => {
                 o.style.pointerEvents = 'none'
             })
-            modebar.style.display = 'none'
+            modeBar.style.display = 'none'
     
             let image = document.createElement('img')
             let c
